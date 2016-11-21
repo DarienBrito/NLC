@@ -92,6 +92,7 @@ The parameters for NLC_Element are:
 
 Here another example using various flavours of one synth:
 
+```js
 ////////////////////////////////////////////
 // A SINGLE ELEMENT (with various flavours)
 ////////////////////////////////////////////
@@ -125,6 +126,7 @@ r =  SynthDef(\testPulse, {|freq = 120, amp = 0.5, envDur = 0.1, out|
 a = NLC_Element([x,y,z,r], \masks, "Fluffy apple from Mars");
 a.makeGUI([\freq, [100, 800], \amp, [0.1, 1.0], \envDur, [0.01, 0.1], \dur, [0.01, 1]], 0@0, skin: \black);
 )
+```
 
 You can now choose the "flavours" for our Fluffy apple from Mars from the "Synth" pop-up menu in the interface. For any construct of different versions to work properly, they must share the same arguments, as you can only pass a single array of arguments to each Element.
 
