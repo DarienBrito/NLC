@@ -46,11 +46,11 @@ I ough a lot to Alberto de Campo's "CloudGenMini", described in Chapter 16 - "Mi
     press cmd+shift+l
 ```
 
-##** Basic Usage**
+##**Basic Usage**
 
 The user builds any kind of SynthDef. The framework simply creates a parametric space that can be explored using various utilities.
 
-#Restriction
+##***Restriction***
 
 - Eveyr SynthDef must have an "out" argument mapped to an Out UGen
 
@@ -68,8 +68,10 @@ x =  SynthDef(\test, {|freq = 120, amp = 0.5, envDur = 0.1, out|
   sig = EnvGen.kr(Env.perc(releaseTime:envDur), doneAction: 2) * sig;
   Out.ar(out, sig);
 }).add;
-// create an Element
-a = NLC_Element(x, \masks, \sine); 
+
+// create an element. Arguments are: synth(s), type of controls, name of the element
+a = NLC_Element(x, \masks, \sine); // type can be \masks or \m & \sliders or \s
+
 // Create a GUI with custom ranges for parameters
 a.makeGUI([\freq, [100, 800], \amp, [0.1, 1.0], \envDur, [0.01, 0.1], \dur, [0.01, 1]]); 
 )
@@ -81,9 +83,9 @@ The resulting GUI is self-explanatory (I hope). It is inspired in Alberto de Cam
 
 This means that you can control the rate of events by passing a \dur key to the GUI, as is the convention for patterns.
 
-##** Many Elements** 
+##**Many Elements** 
 
-Life would be boring with just one of everything... we can easily create a bunch of instances of our element with the NLC_ElementsClones class. It, well... clones things! Each clone is however independent from each other, meaning that you can control every parameter at will without afecting the others. There are macro-controls in the top of the interface to control them all at once
+Life would be boring with just one of everything... we can easily create a bunch of instances of our element with the NLC_ElementsClones class. It, well... clones things! Each clone is however independent from each other, meaning that you can control every parameter at will without afecting the others. There are macro-controls in the top of the interface to control them all at once.
 
 ```js
 ////////////////////
