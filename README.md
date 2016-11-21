@@ -46,16 +46,15 @@ I ough a lot to Alberto de Campo's "CloudGenMini", described in Chapter 16 - "Mi
     press cmd+shift+l
 ```
 
-##**Usage**
+##** Basic Usage**
 
-The user builds any kind of SynthDef. The framework simply creates a parametric space for that SynthDef that can be explored using various utilities.
+The user builds any kind of SynthDef. The framework simply creates a parametric space that can be explored using various utilities.
 
-The only restriction the user has while creating the SynthDef is:
+#Restriction
 
-- It MUST have an "out" argument mapped to the Out UGen
+- Eveyr SynthDef must have an "out" argument mapped to an Out UGen
 
-This is so because there is an internal method of handling routings that otherwise will fail
-
+This is so because there is an internal method of handling routings that otherwise will fail. This is the only restriction while writing your SynthDef. Following an example with a very simple one:
 
 ```js
 
@@ -80,4 +79,31 @@ The resulting GUI is self-explanatory (I hope). It is inspired in Alberto de Cam
 
 - There is a pattern inside every element in NLC
 
-This means that you can control the rate of events by passing a \dur key to the GUI, as is the convention for patterns. 
+This means that you can control the rate of events by passing a \dur key to the GUI, as is the convention for patterns.
+
+##** Many Elements** 
+
+Life would be boring with just one of everything... we can easily create a bunch of instances of our element with the NLC_ElementsClones class. It, well... clones things! Each clone is however independent from each other, meaning that you can control every parameter at will without afecting the others. There are macro-controls in the top of the interface to control them all at once
+
+```js
+////////////////////
+// USING THE CLONER
+///////////////////
+(
+var n = 4; // How many clones?
+var synth =  SynthDef(\test, {|freq = 120, amp = 0.5, envDur = 0.1, out|
+  var sig = SinOsc.ar(freq) * amp;
+  sig = EnvGen.kr(Env.perc(releaseTime:envDur), doneAction: 2) * sig;
+  Out.ar(out, sig);
+}).add;
+
+ // Get them
+var elements = n.collect{|i| NLC_Element(synth, \masks, \sine)};
+// Pass them to the cloner
+var console =  NLC_ElementsClones(elements, [\amp,[0, 0.9], \freq,[60, 2000], \envDur,[0.01,0.1], \dur, [0.01, 0.1]] ! n,
+  "Array of testers").display(\grid, gridCols: 2, gridRows: 2);
+)
+
+```
+
+
