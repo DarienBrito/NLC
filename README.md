@@ -50,7 +50,11 @@ I ough a lot to Alberto de Campo's "CloudGenMini", described in Chapter 16 - "Mi
 
 The user builds any kind of SynthDef. The framework simply creates a parametric space for that SynthDef that can be explored using various utilities.
 
-The only restriction the user has while creating the SynthDef is that it MUST have an "out" argument mapped to the Out UGen. This is so because there is an internal way of handling routings that otherwise will fail.
+The only restriction the user has while creating the SynthDef is:
+
+- It MUST have an "out" argument mapped to the Out UGen
+
+This is so because there is an internal method of handling routings that otherwise will fail
 
 
 ```js
@@ -72,4 +76,8 @@ a.makeGUI([\freq, [100, 800], \amp, [0.1, 1.0], \envDur, [0.01, 0.1], \dur, [0.0
 )
 
 ```
-The resulting GUI is self-explanatory (I hope). It is inspired in Alberto de Campo's CloudGenMini interface.
+The resulting GUI is self-explanatory (I hope). It is inspired in Alberto de Campo's CloudGenMini interface. You may have noticed that there is one parameter there that was not defined in the SynthDef. This was the \dur parameter. This is so because:
+
+- There is a pattern inside every element in NLC
+
+This means that you can control the rate of events by passing a \dur key to the GUI, as is the convention for patterns. 
