@@ -69,10 +69,10 @@ x =  SynthDef(\test, {|freq = 120, amp = 0.5, envDur = 0.1, out|
   Out.ar(out, sig);
 }).add;
 
-// create an element. Arguments are: synth(s), type of controls, name of the element
-a = NLC_Element(x, \masks, \sine); // type can be \masks or \m & \sliders or \s
+// Create an element:
+a = NLC_Element(x, \masks, \sine); 
 
-// Create a GUI with custom ranges for parameters
+// Create a GUI with custom ranges for parameters:
 a.makeGUI([\freq, [100, 800], \amp, [0.1, 1.0], \envDur, [0.01, 0.1], \dur, [0.01, 1]]); 
 )
 
@@ -83,9 +83,54 @@ The resulting GUI is self-explanatory (I hope). It is inspired in Alberto de Cam
 
 This means that you can control the rate of events by passing a \dur key to the GUI, as is the convention for patterns.
 
+The parameters for NLC_Element are:
+
+- synth: a variable referencing your SynthDef or an array with references to various SynthDefs
+- type: the type of controls. It can be \sliders (or \s) and \masks (or \m)
+- name: any name you wanna give your element as a String...mmm... "Fluffy apple from Mars" ? Sure!
+- patternType: can be a \Pbind or a \Pmono. \Pbind by default.
+
+Here another example using various flavours of one synth:
+
+////////////////////////////////////////////
+// A SINGLE ELEMENT (with various flavours)
+////////////////////////////////////////////
+
+(
+x =  SynthDef(\testSine, {|freq = 120, amp = 0.5, envDur = 0.1, out|
+  var sig = SinOsc.ar(freq) * amp;
+  sig = EnvGen.kr(Env.perc(releaseTime:envDur), doneAction: 2) * sig;
+  Out.ar(out, sig);
+}).add;
+
+y =  SynthDef(\testSaw, {|freq = 120, amp = 0.5, envDur = 0.1, out|
+  var sig = Saw.ar(freq) * amp;
+  sig = EnvGen.kr(Env.perc(releaseTime:envDur), doneAction: 2) * sig;
+  Out.ar(out, sig);
+}).add;
+
+z =  SynthDef(\testTri, {|freq = 120, amp = 0.5, envDur = 0.1, out|
+  var sig = VarSaw.ar(freq) * amp;
+  sig = EnvGen.kr(Env.perc(releaseTime:envDur), doneAction: 2) * sig;
+  Out.ar(out, sig);
+}).add;
+
+r =  SynthDef(\testPulse, {|freq = 120, amp = 0.5, envDur = 0.1, out|
+  var sig = Pulse.ar(freq) * amp;
+  sig = EnvGen.kr(Env.perc(releaseTime:envDur), doneAction: 2) * sig;
+  Out.ar(out, sig);
+}).add;
+
+// we pass here an array with all the SynthDefs
+a = NLC_Element([x,y,z,r], \masks, "Fluffy apple from Mars");
+a.makeGUI([\freq, [100, 800], \amp, [0.1, 1.0], \envDur, [0.01, 0.1], \dur, [0.01, 1]], 0@0, skin: \black);
+)
+
+You can now choose the "flavours" for our Fluffy apple from Mars from the "Synth" pop-up menu in the interface. For any construct of different versions to work properly, they must share the same arguments, as you can only pass a single array of arguments to each Element.
+
 ##**Many Elements** 
 
-Life would be boring with just one of everything... we can easily create a bunch of instances of our element with the NLC_ElementsClones class. It, well... clones things! Each clone is however independent from each other, meaning that you can control every parameter at will without afecting the others. There are macro-controls in the top of the interface to control them all at once.
+Life would be boring with just one of everything... we can easily create a bunch of instances of our element with the NLC_ElementsClones class. It, well... clones things! Each clone is however independent from each other, meaning that you can control every parameter at will without afecting the others. There are macro-controls in the top of the interface to control them all at once. A clone also lets you pass an array with different parameters per clone.
 
 ```js
 ////////////////////
@@ -93,6 +138,7 @@ Life would be boring with just one of everything... we can easily create a bunch
 ///////////////////
 (
 var n = 4; // How many clones?
+
 var synth =  SynthDef(\test, {|freq = 120, amp = 0.5, envDur = 0.1, out|
   var sig = SinOsc.ar(freq) * amp;
   sig = EnvGen.kr(Env.perc(releaseTime:envDur), doneAction: 2) * sig;
@@ -101,11 +147,24 @@ var synth =  SynthDef(\test, {|freq = 120, amp = 0.5, envDur = 0.1, out|
 
  // Get them
 var elements = n.collect{|i| NLC_Element(synth, \masks, \sine)};
+
 // Pass them to the cloner
-var console =  NLC_ElementsClones(elements, [\amp,[0, 0.9], \freq,[60, 2000], \envDur,[0.01,0.1], \dur, [0.01, 0.1]] ! n,
-  "Array of testers").display(\grid, gridCols: 2, gridRows: 2);
+var console =  NLC_ElementsClones(
+  elements, 
+  [\amp,[0, 0.9], \freq,[60, 2000], \envDur,[0.01,0.1], \dur, [0.01, 0.1]] ! n, // parameters
+  "Array of testers" // Name
+).display(\grid, gridCols: 2, gridRows: 2); // display mode
 )
 
 ```
+The parameters for NLC_ElementsClones are:
+
+NLC_ElementsClones(elements:, elementsParams:, name:, skin:)
+
+- elements: an array of elements
+- elementsParams: an array of parameters for those elements (elements[0] -> elementsParams[0], etc)
+- name: any name you wanna give to your cloner... "Dolly the sheep on drugs?" sure!
+- skin: can be \black or \gray for now... I'm kinda hoping others will add to the GUISkins class as I hate coming up with colors
+
 
 
