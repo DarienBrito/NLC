@@ -48,6 +48,28 @@ I ough a lot to Alberto de Campo's "CloudGenMini", described in Chapter 16 - "Mi
 
 ##**Usage**
 
+The user builds any kind of SynthDef. The framework simply creates a parametric space for that SynthDef that can be explored using various utilities.
+
+The only restriction the user has while creating the SynthDef is that it MUST have an "out" argument mapped to the Out UGen. This is so because there is an internal way of handling routings that otherwise will fail.
+
+
 ```js
 
+///////////////////////
+// A SINGLE ELEMENT
+///////////////////////
+
+(
+x =  SynthDef(\test, {|freq = 120, amp = 0.5, envDur = 0.1, out|
+  var sig = SinOsc.ar(freq) * amp;
+  sig = EnvGen.kr(Env.perc(releaseTime:envDur), doneAction: 2) * sig;
+  Out.ar(out, sig);
+}).add;
+// create an Element
+a = NLC_Element(x, \masks, \sine); 
+// Create a GUI with custom ranges for parameters
+a.makeGUI([\freq, [100, 800], \amp, [0.1, 1.0], \envDur, [0.01, 0.1], \dur, [0.01, 1]]); 
+)
+
 ```
+The resulting GUI is self-explanatory (I hope). It is inspired in Alberto de Campo's CloudGenMini interface.
