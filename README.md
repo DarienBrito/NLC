@@ -215,5 +215,84 @@ NLC_ElementsContainer is a subClass of NLC_ElementsClones; it shares the same pa
 
 ##**Functionality**
 
+Probably there will be ocasions when you would like to control things from code instead of an interface. Here a list with the most relevant methods of an Element, I clarify what is not obvious:
 
+- .play 
+- .stop
+- .morphStates(array, array, array, int) : Lets you move discretily across selected states of an Element
+
+```js
+
+// Move one time from current state to state 1 in 0.5 seconds and then to 2 in 2 seconds
+myElement.morphStates(order:[1, 2], times:[0.5, 2], curves: [\lin, \exp], n:1);
+
+```
+- .setMorphTime(int) : Sets the general morph time of the element
+- .autoMorph(int) : Morph n times to random states
+- .stopMorphing
+- .change(symbol, value) : Pairs of data. Set the given parameters to whatever you want
+
+```js
+
+// Change freq to be a Pattern
+Myelement.change(\freq, Pseq([100, 500, 2000], inf))
+
+// Change freq and amp to be a constant
+Myelement.change(\freq, 400, \amp, 0.25)
+
+```
+
+This method overrides the corresponding control in the interface with the new value. Since every parameter for an Element has internally a PatternProxy, you can change it to whatever you like within what an Event can handle. 
+
+.revert(symbol) : Revert control of the given parameter to the interface controller 
+.plugMIDI(symbol, int); 
+
+```js
+
+// Plug frequency to CC 0
+MyElement.plugMIDI(\freq, 0)
+
+```
+
+- .plugMIDIAll(array, float) This method assings a batch of CC's to parameters in the interface from top to bottom
+
+```js
+(
+x =  SynthDef(\test, {|freq = 120, amp = 0.5, envDur = 0.1, out|
+  var sig = SinOsc.ar(freq) * amp;
+  sig = EnvGen.kr(Env.perc(releaseTime:envDur), doneAction: 2) * sig;
+  Out.ar(out, sig);
+}).add;
+
+// Create an element:
+MyElement = NLC_Element(x, \masks, \sine); 
+
+// Create a GUI with custom ranges for parameters:
+MyElement.makeGUI([\freq, [100, 800], \amp, [0.1, 1.0], \envDur, [0.01, 0.1], \dur, [0.01, 1]]); 
+)
+
+// When using masks, aperture sets the distance between min and max in the range:
+MyElement.plugMIDIAll(ccArray: (0..3), aperture: 1);
+
+// When using sliders, only an array has to be passed:
+MyElement.plugMIDIAll((0..3))
+
+```
+- plugDiscreteMIDI(tripletArrays) This method is for masks mode only. You map a parameter to MIDI specifically
+
+```js
+//Plug cc's by triplets of [\param, cc, aperture]
+MyElement.plugDiscreteMIDI([[\amp, 0, 0.25], [\freq, 1, 100]]);
+
+```
+- plugPairedMIDI(pairArrays) This method is for sliders mode only. You map a parameter to MIDI specifically
+
+```js
+
+//Plug cc's by pairs of [\param,cc]
+MyElement.plugPairedMIDI([\freq, 0], [\amp, 1])
+
+```
+
+  
 
