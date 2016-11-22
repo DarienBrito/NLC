@@ -215,7 +215,7 @@ NLC_ElementsContainer is a subClass of NLC_ElementsClones; it shares the same pa
 
 ##**Functionality**
 
-Probably there will be ocasions when you would like to control things from code instead of an interface. Here a list with the most relevant methods of an Element, I clarify what is not obvious:
+Probably there will be ocasions when you would like to control things from code instead of an interface. Here a list with the most relevant methods of an Element:
 
 - .play 
 - .stop
@@ -244,9 +244,8 @@ Myelement.change(\freq, 400, \amp, 0.25)
 
 This method overrides the corresponding control in the interface with the new value. Since every parameter for an Element has internally a PatternProxy, you can change it to whatever you like within what an Event can handle. 
 
-.revert(symbol) : Revert control of the given parameter to the interface controller 
-.plugMIDI(symbol, int); 
-
+- .revert(symbol) : Revert control of the given parameter to the interface controller 
+- .plugMIDI(symbol, int) : Map given parameter to given CC
 ```js
 
 // Plug frequency to CC 0
