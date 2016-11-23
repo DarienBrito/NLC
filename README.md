@@ -292,6 +292,17 @@ MyElement.plugDiscreteMIDI([[\amp, 0, 0.25], [\freq, 1, 100]]);
 MyElement.plugPairedMIDI([\freq, 0], [\amp, 1])
 
 ```
-
+##**Extending**
   
+- If you have an idea that feel should be included in this project just give me a shout, or if you feel like coding make a branch, and send a pull request. 
+
+- If there's someone who enjoys designing GUI's, the dblib that is part of this package contains a class called GUISkins. You can add a method with the skin name and color combination of your preference there.
+
+
+##**Bugs**
+
+- If you want to report a bug, please use the [Issue Tracker] (https://github.com/DarienBrito/NLC/issues)
+
+
+
 
