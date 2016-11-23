@@ -4,7 +4,7 @@ _________________________________________________________________________
 A framework for generative exploration
 _________________________________________________________________________
 
-##**What is this? **
+##**What is this?**
 
 During my Master studies I developed a set of tools to help myself in creating streams of compound sounds. I theorized about such streams and tried to categorize them with a given terminology. My interest was to create a method for exploring several generative synthesis methods simultaneously and to be able to define transformations. This repository contains the code I wrote for that purpose. 
 
