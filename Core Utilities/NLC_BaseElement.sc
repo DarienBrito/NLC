@@ -67,8 +67,7 @@ NLC_BaseElement {
 		};
 
 		//Convert from SymbolArray to Array
-		argumentNames = (template.func.argNames).collect{|a| a};
-
+		argumentNames = template.desc.controlNames;
 		// Check  if synth has been properly initiated with an out parameter
 		if(argumentNames.includes(\out).not){
 			protect { 666.kaboom } {|error|
