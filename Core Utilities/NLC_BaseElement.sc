@@ -65,8 +65,7 @@ NLC_BaseElement {
 			template = synth;
 			synths = nil;
 		};
-
-		//Convert from SymbolArray to Array
+		
 		argumentNames = template.desc.controlNames;
 		// Check  if synth has been properly initiated with an out parameter
 		if(argumentNames.includes(\out).not){
