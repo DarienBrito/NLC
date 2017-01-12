@@ -52,7 +52,7 @@ The user builds any kind of SynthDef. The framework simply creates a parametric 
 
 ##***Restriction***
 
-- Eveyr SynthDef must have an "out" argument mapped to an Out UGen
+- Every SynthDef must have an "out" argument mapped to an Out UGen
 
 This is so because there is an internal method of handling routings that otherwise will fail. This is the only restriction while writing your SynthDef. Following an example with a very simple one:
 
