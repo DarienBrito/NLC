@@ -215,7 +215,7 @@ NLC_MasksElement : NLC_MetaElement {
 		.action = { |btn|
 			if(btn.value == 1)
 			{ this.autoRandom(morphN) }
-			{ this.autoRandom() }
+			{ this.stopAutoRandom() }
 		};
 
 		//AutoMorph
