@@ -4,13 +4,13 @@ _________________________________________________________________________
 A framework for generative exploration
 _________________________________________________________________________
 
-##**What is this?**
+## What is this?
 
 During my Master studies I developed a set of tools to help myself in creating streams of compound sounds. I theorized about such streams and tried to categorize them with a given terminology. My interest was to create a method for exploring several generative synthesis methods simultaneously and to be able to define transformations. This repository contains the code I wrote for that purpose. 
 
 If you are interested on reading about my views on sound creation and organization here you can find my [master thesis] (http://darienbrito.com/texts/). While at it, you may also find it interesting to hear some practical applications in my [music] (https://soundcloud.com/darien-brito)
 
-##**About the implementation**
+## About the implementation
 
 I have tried that my implementation is as clean and simple as possible while mantaining modularity and ease of use. There was a previous version of this software that I was intending to release but decided to postpone after it was pointed out to me that there was a better way to do certain things. It was indeed worth to revise some ideas as now the framework is more robust and unnecesary code has been replaced by a more compact design. This is not to say that it is in its final state. I hope more savy people will take over and do better things with it than I have been able to so far.  
 
@@ -23,7 +23,7 @@ I ough a lot to Alberto de Campo's "CloudGenMini", described in Chapter 16 - "Mi
 - You need to download and install the wslib quark
 - You also need my dblib extensions package
 
-##**Installation**
+## Installation
 
 1. Download and install wslib. You can do so by running: 
 
@@ -46,11 +46,11 @@ I ough a lot to Alberto de Campo's "CloudGenMini", described in Chapter 16 - "Mi
     press cmd+shift+l
 ```
 
-##**Basic Usage**
+## Basic Usage
 
 The user builds any kind of SynthDef. The framework simply creates a parametric space that can be explored using various utilities.
 
-##***Restriction***
+## Restriction
 
 - Every SynthDef must have an "out" argument mapped to an Out UGen
 
@@ -130,7 +130,7 @@ a.makeGUI([\freq, [100, 800], \amp, [0.1, 1.0], \envDur, [0.01, 0.1], \dur, [0.0
 
 You can now choose the "flavours" for our "Fluffy apple from Mars" from the Synth pop-up menu in the interface. For any construct of different versions to work properly, they must share the same arguments, as you can only pass a single array of arguments to each Element.
 
-##**Many Elements** 
+## Many Elements
 
 Life would be boring with just one of everything... we can easily create a bunch of instances of our element with the NLC_ElementsClones class. It, well... clones things! Each clone is however independent from each other, meaning that you can control every parameter at will without afecting the others. There are macro-controls in the top of the interface to control them all at once. A clone also lets you pass an array with different parameters per clone. Every clone you pass can have a different control type if you want.
 
@@ -176,7 +176,7 @@ The parameters for the display method are:
 - gridCols: how many columns in grid mode
 - gridRows: how many rows in grid mode
 
-##**Many Different Elements**
+## Many Different Elements
 
 There will be instances where you want to have various elements in an interface where each one of them is a unique synthesis process with its own parameters and control type. This is what the NLC_ElementsContainer is for.
 
@@ -213,7 +213,7 @@ var console =  NLC_ElementsContainer(elements, [
 
 NLC_ElementsContainer is a subClass of NLC_ElementsClones; it shares the same parameters.
 
-##**Functionality**
+## Functionality
 
 Probably there will be ocasions when you would like to control things from code instead of an interface. Here a list with the most relevant methods of an Element:
 
@@ -292,7 +292,7 @@ MyElement.plugDiscreteMIDI([[\amp, 0, 0.25], [\freq, 1, 100]]);
 MyElement.plugPairedMIDI([\freq, 0], [\amp, 1])
 
 ```
-##**Extending**
+## Extending
   
 - If you have an idea that feel should be included in this project just give me a shout, or if you feel like coding make a branch, and send a pull request. 
 
