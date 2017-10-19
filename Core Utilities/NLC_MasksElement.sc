@@ -247,11 +247,7 @@ NLC_MasksElement : NLC_MetaElement {
 		presetsBtn = styler.getSizableButton(childView, \states, \stopStates, size:(bWidth)@bHeight)
 		.action = { |btn|
 			if(btn.value == 1)
-<<<<<<< HEAD
 			{ this.morphStates() }
-=======
-			{ this.morphMasksPresetsBy() }
->>>>>>> 009b0dcacc3988582f3b158cc5a781be76715c9a
 			{ this.stopMorphing() }
 		};
 

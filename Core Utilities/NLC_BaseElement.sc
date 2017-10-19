@@ -133,23 +133,19 @@ NLC_BaseElement {
 		pairs.pairsDo{|label, val, i|
 			var test;
 			formatedPairs.add($\\++label);
-<<<<<<< HEAD
+
 			// Defaults for the following found keys...
-=======
->>>>>>> 009b0dcacc3988582f3b158cc5a781be76715c9a
 			test = switch(label)
 			{\freq} {[20, 20000,\exp]}
 			{\amp} {[0.0, 1]}
 			{\pan} {[-1,1]}
 			{\dur} {[0.01, 1]}
-<<<<<<< HEAD
 			{\pos} {[0.0, 1.0]}
 			{\startPos} {[0.0, 0.5]}
 			{\endPos} {[0.5, 1.0]}
 			{\rate}{[0.1, 1.0]}
 			{\spread} {[0.1, 1.0]}
-=======
->>>>>>> 009b0dcacc3988582f3b158cc5a781be76715c9a
+
 			{[1, val]};
 			formatedPairs.add(test);
 		}
