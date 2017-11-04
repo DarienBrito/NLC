@@ -231,7 +231,7 @@ NLC_SlidersElement : NLC_MetaElement {
 		presetsBtn = styler.getSizableButton(childView, \states, \stopStates, size:(bWidth)@bHeight)
 		.action = { |btn|
 			if(btn.value == 1)
-			{ this.morphMasksPresetsBy() }
+			{ this.morphStates() }
 			{ this.stopMorphing() }
 		};
 
@@ -302,8 +302,8 @@ NLC_SlidersElement : NLC_MetaElement {
 			The disadvantage of this is that if synth is changed, Pattern dur resets to when triggered,
 			something maybe not desirable in very strict-tempo live-coding, but for our general purposes will do!
 			*/
-
 			if  ( class(pattern) == class(Pmono()) ) {
+				"Pmono".postln;
 				synthName = pop.items[pop.value];
 				currentSynth = pop.items[pop.value];
 				this.specialStop.play; // This prevents interpolation from breaking

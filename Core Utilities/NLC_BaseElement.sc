@@ -41,7 +41,8 @@ NLC_BaseElement {
 	init {|synth_|
 		synth = synth_;
 		this.invokeData(synth);
-	}*/
+	}
+*/
 
 	invokeData {|synth, patternType = \Pbind|
 		this.initData(synth);

@@ -37,18 +37,16 @@ NLC_ElementsClones {
 		^super.newCopyArgs(elements, elementsParams, name, skin).init();
 	}
 
+	init{
+		var skinObj = GUISkins(skin);
+		backgroundColor = skinObj.backgroundColor;
+		this.computeModuleSize(elements[0].bWidth, elements[0].bHeight, elementsParams[0].size);
+	}
+
 	setDefaults {  | defaultsArray | // an array of dictionaries
 		elements.do{|e, i|
 			e.setDefaults(defaultsArray[i]);
 		}
-	}
-
-	init{
-		var skinObj = GUISkins(skin);
-		backgroundColor = skinObj.backgroundColor;
-		skinObj.postln;
-		backgroundColor.postln;
-		this.computeModuleSize(elements[0].bWidth, elements[0].bHeight, elementsParams[0].size);
 	}
 
 	display { | orientation = \grid, dimension = 800, gridCols = 2, gridRows = 2 |
