@@ -13,7 +13,7 @@ NLC_BufCombine {
 	}
 
 	init {|input_|
-	input = input_;
+		input = input_;
 	}
 
 	makeCombination {
@@ -27,7 +27,7 @@ NLC_BufCombine {
 			frames = sum;
 		});
 
-		final = Buffer.alloc(Server.local, frames); //Allocate a Buffer with the right length
+		final = Buffer.alloc(Server.local, frames, input[0].numChannels); //Allocate a Buffer with the right length
 		end = input[0].numFrames; //We use this to know the first frame number and use it for our first iteration
 
 		fork {
