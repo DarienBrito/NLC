@@ -113,6 +113,13 @@ NLC_MetaElement : NLC_BaseElement {
 		this.buildGui(pos, onTop, skin, master);
 	}
 
+	makeDefaultGUI { | pos, onTop = false, skin = \gray, master = nil |
+		this.initVals(this.getDefaultParams);
+		this.makeMasksPresetTags;
+		this.setProxies;
+		this.buildGui(pos, onTop, skin, master);
+	}
+
 	close {
 		win.close;
 		this.stop();

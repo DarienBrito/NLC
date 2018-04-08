@@ -43,6 +43,10 @@ NLC_Element {
 		obj.makeGUI(paramPairs, pos, onTop: false, skin: skin, master: master);
 	}
 
+	makeDefaultGUI { |pos, skin = \black, master |
+		obj.makeGUI(obj.getDefaultParams, pos, onTop: false, skin: skin, master: master);
+	}
+
 	setDefaults { | paramDefaults |
 		obj.setDefaults(paramDefaults);
 	}

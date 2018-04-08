@@ -32,7 +32,7 @@ NLC_BaseElement {
 	var proxyList, paramList, isPlaying;
 	var <pattern, <playBtn;
 	var isPlaying, instrumentName;
-	var <synth;
+	var <synth, <templateDictionary, <argumentNames;
 
 /*	*new {|synth|
 		^super.new.init(synth);
@@ -55,7 +55,7 @@ NLC_BaseElement {
 		// Add here controls that are wanted by default
 		var innerLabels = [\dur];
 		var innerParameters = [1];
-		var argumentNames, synthParameters, template;
+		var synthParameters, template;
 		var removalIndex;
 		synth.postln;
 		// Check if input is array of synths
@@ -68,6 +68,8 @@ NLC_BaseElement {
 		};
 
 		argumentNames = template.desc.controlNames;
+		templateDictionary = template.desc.controlDict;
+
 		// Check  if synth has been properly initiated with an out parameter
 		if(argumentNames.includes(\out).not){
 			protect { 666.kaboom } {|error|
@@ -126,6 +128,26 @@ NLC_BaseElement {
 			pairedParams = [synthName] ++ pairedParams ++ auxProxies;
 			pattern = Pmono(*pairedParams)
 		}
+	}
+
+	// getDefaultParams {
+	// 	var pairs = argumentNames.collect{|label|
+	// 		if(label != \out) {
+	// 			[label, [templateDictionary[label].defaultValue, templateDictionary[label].defaultValue]]
+	// 		};
+	// 	};
+	// 	^pairs.flatten
+	// }
+
+	// Same as above, but useful for written customization when creting the objects
+	getDefaultRanges{
+		var pairs = argumentNames.collect{|label|
+			if(label != \out) {
+				[$\\ ++ label, [templateDictionary[label].defaultValue, templateDictionary[label].defaultValue]]
+			};
+		};
+		pairs = pairs ++ [["\\dur"], [[0.01, 0.5]]];
+		^pairs.flatten
 	}
 
 	getGuiParams {

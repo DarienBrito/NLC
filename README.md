@@ -8,7 +8,7 @@ _________________________________________________________________________
 
 During my Master studies I developed a set of tools to help myself in creating streams of compound sounds. I theorized about such streams and tried to categorize them with a given terminology. My interest was to create a method for exploring several generative synthesis methods simultaneously and to be able to define transformations. This repository contains the code I wrote for that purpose. 
 
-If you are interested on reading about my views on sound creation and organization here you can find my [master thesis] (http://darienbrito.com/Thesis/Elements_Forms_Behaviours.pdf). While at it, you may also find it interesting to hear some practical applications in my [music] (https://soundcloud.com/darien-brito)
+If you are interested on reading about my views on sound creation and organization here you can find my [master thesis] (http://darienbrito.com/Thesis/Elements_Forms_Behaviours.pdf). While at it, you may also find it interesting to hear some practical applications in my [work] (https://www.darienbrito.com)
 
 ## About the implementation
 
@@ -16,7 +16,7 @@ I have tried that my implementation is as clean and simple as possible while man
 
 I ough a lot to Alberto de Campo's "CloudGenMini", described in Chapter 16 - "Microsound" of the SuperCollider book, from where key concepts and code were taken. 
 
-##**Requirements**
+## Requirements
 
 - The framework has been tested with SuperCollider 3.7 running on a Macintosh. 
   Probably it will work on Windows as well but this has not been tested.
@@ -48,13 +48,13 @@ I ough a lot to Alberto de Campo's "CloudGenMini", described in Chapter 16 - "Mi
 
 ## Basic Usage
 
-The user builds any kind of SynthDef. The framework simply creates a parametric space that can be explored using various utilities.
+The user builds any kind of SynthDef, as simple or as complex as wanted. The framework simply creates a parametric space that can be explored using various utilities.
 
 ## Restriction
 
 - Every SynthDef must have an "out" argument mapped to an Out UGen
 
-This is so because there is an internal method of handling routings that otherwise will fail. This is the only restriction while writing your SynthDef. Following an example with a very simple one:
+This is so because there is an internal method of handling routings that otherwise will fail. This is the only restriction while writing your SynthDef. Following an example with a very simple sound:
 
 ```js
 
