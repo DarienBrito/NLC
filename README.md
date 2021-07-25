@@ -6,9 +6,9 @@ _________________________________________________________________________
 
 ## What is this?
 
-During my Master studies I developed a set of tools to help myself in creating streams of compound sounds. I theorized about such streams and tried to categorize them with a given terminology. My interest was to create a method for exploring several generative synthesis methods simultaneously and to be able to define transformations. This repository contains the code I wrote for that purpose. 
+During my Master's studies, I developed a set of tools to create streams of compound sounds. I theorized about such streams and tried to categorize them with a given terminology. My interest was to devise a method to explore several generative synthesis processes simultaneously and to be able to define transformations. This repository contains the code I wrote for that purpose.
 
-If you are interested on reading about my views on sound creation and organization here you can find my [master thesis] (http://darienbrito.com/Thesis/Elements_Forms_Behaviours.pdf). While at it, you may also find it interesting to hear some practical applications of those concepts in my [work] (http://darienbrito.com/)
+If you are interested, you can find my [master thesis here] (http://darienbrito.com/Thesis/Elements_Forms_Behaviours.pdf). While at it, you may also find it interesting to hear some practical applications of those concepts in my [work] (http://darienbrito.com/)
 
 
 ## About the implementation
